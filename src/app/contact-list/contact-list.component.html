@@ -1,0 +1,33 @@
+<h1 class="title" align="center">Phonebook App <strong>{{ currentUser.username }}</strong> </h1>
+<div *ngIf="contactlist">
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Phone No.</th>
+      
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let contact of contactlist; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>     
+        {{ contact.firstName }}
+      </td>
+      <td>{{ contact.lastName }}</td>
+      <td>{{ contact.phone }}</td>
+    
+      <td>
+        <button (click)="editContact(contact)" style="width: 25%;"  class="btn btn-info"> Edit</button>  
+        <button (click)="deleteContactById(contact.contactId)" style="margin-left: 20px; width: 25%;" class="btn btn-danger"> Delete</button>  
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" style="margin-left: 20px;" (click)="addContact()">Add contact</button>
+</div>

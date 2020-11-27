@@ -1,0 +1,44 @@
+<div class="col-lg-12 user-container">
+    <h1 class="text-center" *ngIf="isAddMode">Add contact</h1>
+<h1 class="text-center" *ngIf="!isAddMode">Edit Contact</h1>
+    <form [formGroup]="addEditForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+            <div *ngIf="f.phone.errors.required">Phone is required</div>
+            <div *ngIf="f.phone.errors.pattern">Phone contains only digitt</div>
+            <div *ngIf="f.phone.errors.minlength">Minimum number of digits is 8</div>
+        </div>
+      </div>
+ 
+  <div class="row">
+      <button class="btn btn-success" style="margin-left: 20px;">Save</button>
+      <button class="btn btn-primary" style="margin-left: 10px;" (click)="backToContactList()">Back to contact list</button>
+    </div>
+      <div *ngIf="showAlert">
+        <div class="alert alert-success" *ngIf="isAddMode">
+          <strong>Success!</strong> New contact added.
+        </div> 
+        <div class="alert alert-success" *ngIf="!isAddMode">
+          <strong>Success!</strong> Contact updated.
+        </div>
+      
+      </div>
+    </form>
+  </div>
